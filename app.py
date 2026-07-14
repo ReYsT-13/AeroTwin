@@ -237,55 +237,60 @@ if st.button("🚀 Predict Engine Health"):
     st.divider()
 
     st.subheader("⚙️ Physics Validation")
+    col1, col2 = st.columns(2)
 
-col1, col2 = st.columns(2)
+    with col1:
 
-with col1:
+        st.metric(
+            "Pressure Ratio",
+            physics["pressure_ratio"]
+        )
 
-    st.metric(
-        "Pressure Ratio",
-        physics["pressure_ratio"]
+        st.metric(
+            "Temperature Drop",
+            f"{physics['temperature_drop']} K"
+        )
+
+    with col2:
+
+        st.metric(
+            "Ideal Brayton Efficiency",
+            f"{physics['ideal_efficiency']} %"
+        )
+
+        st.metric(
+            "Hybrid Confidence",
+            f"{physics['hybrid_score']} %"
+        )
+
+    st.success(
+        physics["assessment"]
     )
 
-    st.metric(
-        "Temperature Drop",
-        f"{physics['temperature_drop']} K"
-    )
+    # -------------------------------------------------
+    # HYBRID DIGITAL TWIN
+    # -------------------------------------------------
 
-with col2:
+    st.divider()
 
-    st.metric(
-        "Ideal Brayton Efficiency",
-        f"{physics['ideal_efficiency']} %"
-    )
+    st.subheader("🛰 Hybrid Digital Twin Assessment")
 
     st.metric(
         "Hybrid Confidence",
         f"{physics['hybrid_score']} %"
     )
 
-st.success(
-    physics["assessment"]
-)
+    if physics["hybrid_score"] >= 90:
+        st.success(physics["assessment"])
 
-    # -------------------------------------------------
-    # HYBRID DIGITAL TWIN
-    # -------------------------------------------------
+    elif physics["hybrid_score"] >= 70:
+        st.warning(physics["assessment"])
 
-st.divider()
+    else:
+        st.error(physics["assessment"])
 
-st.subheader("🛰 Hybrid Digital Twin Assessment")
+    st.divider()
 
-st.metric(
-    "Hybrid Confidence",
-    f"{physics['hybrid_score']} %"
-)
-
-if physics["hybrid_score"] >= 90:
-    st.success(physics["assessment"])
-
-elif physics["hybrid_score"] >= 70:
-    st.warning(physics["assessment"])
-
-else:
-    st.error(physics["assessment"])
+    st.caption(
+        "AeroTwin • Hybrid Digital Twin using Machine Learning + Brayton Cycle Physics"
+    )
