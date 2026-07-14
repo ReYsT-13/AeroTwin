@@ -195,14 +195,14 @@ if st.button("🚀 Predict Engine Health"):
 
     st.divider()
 
-st.subheader("⚙️ Physics-Based Validation")
+    st.subheader("⚙️ Physics-Based Validation")
 
-p1, p2 = st.columns(2)
+    p1, p2 = st.columns(2)
 
-with p1:
-    st.metric(
-        "Compressor Pressure Ratio",
-        physics["pressure_ratio"]
+    with p1:
+        st.metric(
+            "Compressor Pressure Ratio",
+            physics["pressure_ratio"]
     )
 
     st.metric(
@@ -210,7 +210,7 @@ with p1:
         f"{physics['temperature_drop']} K"
     )
 
-with p2:
+    with p2:
     st.metric(
         "Ideal Brayton Efficiency",
         f"{physics['ideal_efficiency']} %"
