@@ -1,24 +1,35 @@
 import streamlit as st
+
 from backend import predict_engine
+from physics import calculate_physics
+
 from charts import (
     component_health_chart,
     health_gauge,
     health_trend
 )
-from physics import calculate_physics
 
-# ----------------------------
-# PAGE SETTINGS
-# ----------------------------
+# -------------------------------------------------
+# PAGE CONFIG
+# -------------------------------------------------
+
 st.set_page_config(
     page_title="AeroTwin Digital Twin",
+    page_icon="✈️",
     layout="wide"
 )
 
-st.title("✈️ AeroTwin - Digital Twin Dashboard")
-st.caption("HAL x IIT Indore | AI-based Turbojet Health Monitoring")
+st.title("✈️ AeroTwin - Hybrid Digital Twin Dashboard")
 
+st.caption(
+    "HAL × IIT Indore | AI + Physics Based Turbojet Engine Health Monitoring"
+)
 
+st.divider()
+
+# -------------------------------------------------
+# SIDEBAR
+# -------------------------------------------------
 
 st.sidebar.header("Engine Inputs")
 
@@ -106,82 +117,109 @@ T4 = st.sidebar.slider(
     700
 )
 
-# ----------------------------
-# PREDICT BUTTON
-# ----------------------------
+# -------------------------------------------------
+# RUN MODEL
+# -------------------------------------------------
 
 if st.button("🚀 Predict Engine Health"):
 
     result = predict_engine([
-    Altitude,
-    Mach,
-    Tamb,
-    Pamb,
-    RPM,
-    FuelFlow,
-    P2,
-    T2,
-    P3,
-    T3,
-    P4,
-    T4
-])
-    
+        Altitude,
+        Mach,
+        Tamb,
+        Pamb,
+        RPM,
+        FuelFlow,
+        P2,
+        T2,
+        P3,
+        T3,
+        P4,
+        T4
+    ])
 
     physics = calculate_physics(
-    P2,
-    P3,
-    T3,
-    T4
-)
-    st.success(f"Prediction Complete!  {result['status']}")
+        P2,
+        P3,
+        T3,
+        T4, 
+         result["overall"]
+    )
+
+    st.success(
+        f"Prediction Complete • {result['status']}"
+    )
+    # -------------------------------------------------
+    # AI PREDICTIONS
+    # -------------------------------------------------
+
+    st.divider()
+
+    st.subheader("🤖 AI Prediction Results")
 
     c1, c2, c3 = st.columns(3)
 
-    c1.metric(
-        "Compressor Health",
-        f"{result["compressor"]:.2f}"
-    )
+    with c1:
+        st.metric(
+            "Compressor Health",
+            f"{result['compressor']:.1f} %"
+        )
 
-    c2.metric(
-        "Combustor Health",
-        f"{result["combustor"]:.2f}"
-    )
+    with c2:
+        st.metric(
+            "Combustor Health",
+            f"{result['combustor']:.1f} %"
+        )
 
-    c3.metric(
-        "Turbine Health",
-        f"{result["turbine"]:.2f}"
-    )
+    with c3:
+        st.metric(
+            "Turbine Health",
+            f"{result['turbine']:.1f} %"
+        )
 
     c4, c5, c6 = st.columns(3)
 
-    c4.metric(
-        "Overall Health",
-        f"{result["overall"]:.2f}"
+    with c4:
+        st.metric(
+            "Overall Health",
+            f"{result['overall']:.1f} %"
+        )
+
+    with c5:
+        st.metric(
+            "Predicted Thrust",
+            f"{result['thrust']:.2f} kN"
+        )
+
+    with c6:
+        st.metric(
+            "TSFC",
+            f"{result['tsfc']:.4f}"
+        )
+
+    st.info(
+        f"🤖 Model Confidence : {result['confidence']}%"
     )
 
-    c5.metric(
-        "Predicted Thrust",
-        f"{result["thrust"]:.2f}"
-    )
-
-    c6.metric(
-        "TSFC",
-        f"{result["tsfc"]:.4f}"
-    )
+    # -------------------------------------------------
+    # VISUAL DASHBOARD
+    # -------------------------------------------------
 
     st.divider()
+
     st.subheader("📊 Engine Health Dashboard")
 
     left, right = st.columns(2)
 
     with left:
+
         st.plotly_chart(
             health_gauge(result["overall"]),
             use_container_width=True
         )
 
     with right:
+
         st.plotly_chart(
             component_health_chart(result),
             use_container_width=True
@@ -191,32 +229,63 @@ if st.button("🚀 Predict Engine Health"):
         health_trend(result),
         use_container_width=True
     )
-    st.info(f"🤖 AI Confidence: {result['confidence']}%")
+
+    # -------------------------------------------------
+    # PHYSICS LAYER
+    # -------------------------------------------------
 
     st.divider()
 
-    st.subheader("⚙️ Physics-Based Validation")
+    st.subheader("⚙️ Physics Validation")
 
-    p1, p2 = st.columns(2)
+col1, col2 = st.columns(2)
 
-    with p1:
-        st.metric(
-            "Compressor Pressure Ratio",
-            physics["pressure_ratio"]
+with col1:
+
+    st.metric(
+        "Pressure Ratio",
+        physics["pressure_ratio"]
     )
 
     st.metric(
-        "Turbine Temperature Drop",
+        "Temperature Drop",
         f"{physics['temperature_drop']} K"
     )
 
-    with p2:
+with col2:
+
     st.metric(
         "Ideal Brayton Efficiency",
         f"{physics['ideal_efficiency']} %"
     )
 
     st.metric(
-        "Physics Status",
-        physics["physics_status"]
+        "Hybrid Confidence",
+        f"{physics['hybrid_score']} %"
     )
+
+st.success(
+    physics["assessment"]
+)
+
+    # -------------------------------------------------
+    # HYBRID DIGITAL TWIN
+    # -------------------------------------------------
+
+st.divider()
+
+st.subheader("🛰 Hybrid Digital Twin Assessment")
+
+st.metric(
+    "Hybrid Confidence",
+    f"{physics['hybrid_score']} %"
+)
+
+if physics["hybrid_score"] >= 90:
+    st.success(physics["assessment"])
+
+elif physics["hybrid_score"] >= 70:
+    st.warning(physics["assessment"])
+
+else:
+    st.error(physics["assessment"])
