@@ -5,6 +5,7 @@ from charts import (
     health_gauge,
     health_trend
 )
+from physics import calculate_physics
 
 # ----------------------------
 # PAGE SETTINGS
@@ -125,6 +126,14 @@ if st.button("🚀 Predict Engine Health"):
     P4,
     T4
 ])
+    
+
+    physics = calculate_physics(
+    P2,
+    P3,
+    T3,
+    T4
+)
     st.success(f"Prediction Complete!  {result['status']}")
 
     c1, c2, c3 = st.columns(3)
@@ -183,3 +192,31 @@ if st.button("🚀 Predict Engine Health"):
         use_container_width=True
     )
     st.info(f"🤖 AI Confidence: {result['confidence']}%")
+
+    st.divider()
+
+st.subheader("⚙️ Physics-Based Validation")
+
+p1, p2 = st.columns(2)
+
+with p1:
+    st.metric(
+        "Compressor Pressure Ratio",
+        physics["pressure_ratio"]
+    )
+
+    st.metric(
+        "Turbine Temperature Drop",
+        f"{physics['temperature_drop']} K"
+    )
+
+with p2:
+    st.metric(
+        "Ideal Brayton Efficiency",
+        f"{physics['ideal_efficiency']} %"
+    )
+
+    st.metric(
+        "Physics Status",
+        physics["physics_status"]
+    )
