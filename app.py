@@ -165,6 +165,34 @@ if st.button("🚀 Predict Engine Health"):
     st.success(
         f"Prediction Complete • {result['status']}"
     )
+
+    st.divider()
+
+    st.subheader("📡 Current Engine Conditions")
+
+    left, right = st.columns(2)
+
+    with left:
+
+        st.markdown("#### ✈️ Flight Conditions")
+
+        st.metric("Altitude", f"{Altitude:,} m")
+        st.metric("Mach Number", f"{Mach:.2f}")
+        st.metric("Ambient Temperature", f"{Tamb} K")
+        st.metric("Ambient Pressure", f"{Pamb:,} Pa")
+
+    with right:
+
+        st.markdown("#### ⚙️ Engine Parameters")
+
+        st.metric("RPM", f"{RPM:,}")
+        st.metric("Fuel Flow", f"{FuelFlow:.2f} kg/s")
+        st.metric("P2", f"{P2:,} Pa")
+        st.metric("P3", f"{P3:,} Pa")
+        st.metric("T3", f"{T3} K")
+        st.metric("T4", f"{T4} K")
+
+
     # -------------------------------------------------
     # AI PREDICTIONS
     # -------------------------------------------------
