@@ -20,18 +20,26 @@ st.set_page_config(
 )
 logo = Image.open("assets/aerotwin_logo.png")
 
-col1, col2 = st.columns([1.3, 3])
+st.image(logo, width=420)
 
-with col1:
-    st.image(logo, width=220)
+st.markdown(
+    """
+    <h1 style='text-align:center;'>AeroTwin</h1>
 
-with col2:
-    st.title("AeroTwin")
-    st.markdown("### Hybrid AI–Physics Digital Twin Platform")
-    st.markdown("**HAL × IIT Indore Hackathon 2026**")
-    st.caption(
-        "Real-Time Turbojet Engine Health Monitoring • Brayton Cycle Validation • Predictive Maintenance"
-    )
+    <h3 style='text-align:center;color:#9CA3AF;'>
+    Hybrid AI–Physics Digital Twin Platform
+    </h3>
+
+    <p style='text-align:center;font-size:18px;color:#D1D5DB'>
+    HAL × IIT Indore Hackathon 2026
+    </p>
+
+    <p style='text-align:center;color:#94A3B8'>
+    Real-Time Turbojet Engine Health Monitoring • Physics Validation • Predictive Maintenance
+    </p>
+    """,
+    unsafe_allow_html=True,
+)
 
 st.divider()
 
