@@ -365,7 +365,68 @@ Model Confidence :
 
     else:
         st.error(physics["assessment"])
+    st.divider()
 
+    st.subheader("🛠 Maintenance Recommendation")
+
+    overall = result["overall"]
+
+    if overall >= 90:
+
+        priority = "🟢 LOW"
+        action = "Continue Normal Operation"
+        recommendation = (
+            "Engine health is within the expected operating range. "
+            "No immediate maintenance action is required."
+    )
+        inspection = "Routine inspection after 100 flight hours."
+
+    elif overall >= 75:
+
+        priority = "🟡 MEDIUM"
+        action = "Schedule Preventive Inspection"
+        recommendation = (
+            "Minor degradation detected. "
+            "Inspect compressor and combustor during the next maintenance cycle."
+    )
+        inspection = "Recommended within 20–30 flight hours."
+
+    else:
+
+        priority = "🔴 HIGH"
+        action = "Immediate Maintenance Required"
+        recommendation = (
+            "Engine health is below the acceptable threshold. "
+            "Detailed inspection is recommended before further operation."
+    )
+        inspection = "Immediate inspection recommended."
+
+    col1, col2 = st.columns([1, 2])
+
+    with col1:
+
+        st.metric(
+            "Priority",
+            priority
+    )
+
+        st.metric(
+            "Action",
+            action
+    )
+
+    with col2:
+
+        st.info(
+            recommendation
+    )
+
+        st.success(
+            f"📅 Next Inspection: {inspection}"
+    )
+        
+
+        
     st.divider()
 
     st.caption(
