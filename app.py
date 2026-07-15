@@ -1,5 +1,5 @@
 import streamlit as st
-
+from PIL import Image
 from backend import predict_engine
 from physics import calculate_physics
 
@@ -18,85 +18,23 @@ st.set_page_config(
     page_icon="✈️",
     layout="wide"
 )
+logo = Image.open("assets/aerotwin_logo.png")
 
-st.markdown("""
-# ✈️ AeroTwin
+col1, col2 = st.columns([1.3, 3])
 
-### Hybrid AI–Physics Digital Twin Platform
+with col1:
+    st.image(logo, width=220)
 
-**HAL × IIT Indore Hackathon 2026**
-
-Real-Time Turbojet Engine Health Monitoring | Predictive Maintenance | Physics Validation
-""")
+with col2:
+    st.title("AeroTwin")
+    st.markdown("### Hybrid AI–Physics Digital Twin Platform")
+    st.markdown("**HAL × IIT Indore Hackathon 2026**")
+    st.caption(
+        "Real-Time Turbojet Engine Health Monitoring • Brayton Cycle Validation • Predictive Maintenance"
+    )
 
 st.divider()
-st.markdown("""
-<style>
 
-.banner{
-background: linear-gradient(135deg,#081229,#0B3D91,#0F62FE);
-padding:28px;
-border-radius:20px;
-margin-bottom:25px;
-box-shadow:0px 10px 25px rgba(0,0,0,0.35);
-border:1px solid rgba(255,255,255,0.15);
-}
-
-.logo{
-font-size:48px;
-font-weight:800;
-color:white;
-margin-bottom:5px;
-}
-
-.subtitle{
-font-size:22px;
-font-weight:600;
-color:#E5E7EB;
-margin-bottom:8px;
-}
-
-.desc{
-font-size:16px;
-color:#D1D5DB;
-}
-
-.status{
-float:right;
-background:#16A34A;
-padding:10px 18px;
-border-radius:30px;
-font-weight:bold;
-color:white;
-font-size:15px;
-}
-
-</style>
-
-<div class="banner">
-
-<div class="status">
-🟢 ONLINE
-</div>
-
-<div class="logo">
-✈️ AeroTwin
-</div>
-
-<div class="subtitle">
-Hybrid AI–Physics Digital Twin Platform
-</div>
-
-<div class="desc">
-HAL × IIT Indore Hackathon 2026
-</div>
-
-<div class="desc">
-Real-Time Turbojet Engine Health Monitoring • Brayton Cycle Validation • Predictive Maintenance
-</div>
-
-</div>
-""", unsafe_allow_html=True)
 # -------------------------------------------------
 # SIDEBAR
 # -------------------------------------------------
