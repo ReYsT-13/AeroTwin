@@ -430,5 +430,5 @@ Model Confidence :
     st.divider()
 
     st.caption(
-        "© 2026 AeroTwin • Hybrid AI + Physics Digital Twin • Developed for HAL × IIT Indore Hackathon"
+        "© 2026 AeroTwin • Hybrid AI + Physics Digital Twin "
 )
