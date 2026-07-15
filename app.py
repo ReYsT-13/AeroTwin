@@ -19,14 +19,59 @@ st.set_page_config(
     layout="wide"
 )
 
-st.title("✈️ AeroTwin - Hybrid Digital Twin Dashboard")
+st.markdown("""
+# ✈️ AeroTwin
 
-st.caption(
-    "HAL × IIT Indore | AI + Physics Based Turbojet Engine Health Monitoring"
-)
+### Hybrid AI–Physics Digital Twin Platform
+
+**HAL × IIT Indore Hackathon 2026**
+
+Real-Time Turbojet Engine Health Monitoring | Predictive Maintenance | Physics Validation
+""")
 
 st.divider()
+st.markdown("""
+<style>
+.header-box{
+background:#0F172A;
+padding:18px;
+border-radius:15px;
+border:2px solid #2563EB;
+margin-bottom:20px;
+}
+.big{
+font-size:34px;
+font-weight:700;
+color:white;
+}
+.small{
+font-size:17px;
+color:#CBD5E1;
+}
+</style>
 
+<div class="header-box">
+
+<div class="big">
+✈ AeroTwin
+</div>
+
+<div class="small">
+Hybrid AI–Physics Digital Twin Platform
+</div>
+
+<br>
+
+<div class="small">
+HAL × IIT Indore Hackathon 2026
+</div>
+
+<div class="small">
+Real-Time Engine Health Monitoring • Brayton Cycle Validation • Predictive Maintenance
+</div>
+
+</div>
+""", unsafe_allow_html=True)
 # -------------------------------------------------
 # SIDEBAR
 # -------------------------------------------------
@@ -200,6 +245,39 @@ if st.button("🚀 Predict Engine Health"):
     st.info(
         f"🤖 Model Confidence : {result['confidence']}%"
     )
+
+    st.markdown(f"""
+<div style="
+background:#0B1220;
+padding:18px;
+border-radius:15px;
+border-left:8px solid #10B981;
+margin-bottom:25px;
+">
+
+<h2 style="color:white;">
+🟢 Engine Status : {result["status"]}
+</h2>
+
+<p style="font-size:18px;color:#D1D5DB;">
+
+Overall Health :
+<b>{result["overall"]:.1f}%</b>
+
+<br>
+
+Hybrid Agreement :
+<b>{physics["hybrid_score"]}%</b>
+
+<br>
+
+Model Confidence :
+<b>{result["confidence"]}%</b>
+
+</p>
+
+</div>
+""", unsafe_allow_html=True)
 
     # -------------------------------------------------
     # VISUAL DASHBOARD
