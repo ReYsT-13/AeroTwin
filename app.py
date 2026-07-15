@@ -32,42 +32,67 @@ Real-Time Turbojet Engine Health Monitoring | Predictive Maintenance | Physics V
 st.divider()
 st.markdown("""
 <style>
-.header-box{
-background:#0F172A;
-padding:18px;
-border-radius:15px;
-border:2px solid #2563EB;
-margin-bottom:20px;
+
+.banner{
+background: linear-gradient(135deg,#081229,#0B3D91,#0F62FE);
+padding:28px;
+border-radius:20px;
+margin-bottom:25px;
+box-shadow:0px 10px 25px rgba(0,0,0,0.35);
+border:1px solid rgba(255,255,255,0.15);
 }
-.big{
-font-size:34px;
-font-weight:700;
+
+.logo{
+font-size:48px;
+font-weight:800;
 color:white;
+margin-bottom:5px;
 }
-.small{
-font-size:17px;
-color:#CBD5E1;
+
+.subtitle{
+font-size:22px;
+font-weight:600;
+color:#E5E7EB;
+margin-bottom:8px;
 }
+
+.desc{
+font-size:16px;
+color:#D1D5DB;
+}
+
+.status{
+float:right;
+background:#16A34A;
+padding:10px 18px;
+border-radius:30px;
+font-weight:bold;
+color:white;
+font-size:15px;
+}
+
 </style>
 
-<div class="header-box">
+<div class="banner">
 
-<div class="big">
-✈ AeroTwin
+<div class="status">
+🟢 ONLINE
 </div>
 
-<div class="small">
+<div class="logo">
+✈️ AeroTwin
+</div>
+
+<div class="subtitle">
 Hybrid AI–Physics Digital Twin Platform
 </div>
 
-<br>
-
-<div class="small">
+<div class="desc">
 HAL × IIT Indore Hackathon 2026
 </div>
 
-<div class="small">
-Real-Time Engine Health Monitoring • Brayton Cycle Validation • Predictive Maintenance
+<div class="desc">
+Real-Time Turbojet Engine Health Monitoring • Brayton Cycle Validation • Predictive Maintenance
 </div>
 
 </div>
