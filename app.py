@@ -137,6 +137,7 @@ T4 = st.sidebar.slider(
 # -------------------------------------------------
 
 if st.button("🚀 Predict Engine Health"):
+    st.info("🟢 System Status: Ready | 🤖 AI Model Loaded | ⚙️ Physics Engine Active")
 
     result = predict_engine([
         Altitude,
@@ -340,5 +341,5 @@ Model Confidence :
     st.divider()
 
     st.caption(
-        "AeroTwin • Hybrid Digital Twin using Machine Learning + Brayton Cycle Physics"
-    )
+        "© 2026 AeroTwin • Hybrid AI + Physics Digital Twin • Developed for HAL × IIT Indore Hackathon"
+)
