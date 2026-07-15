@@ -18,29 +18,28 @@ st.set_page_config(
     page_icon="✈️",
     layout="wide"
 )
-logo = Image.open("assets/aerotwin_logo.png")
+banner = Image.open("assets/banner.png")
 
-st.image(logo, width=420)
+st.image(
+    banner,
+    use_container_width=True
+)
 
 st.markdown(
     """
-    <h1 style='text-align:center;'>AeroTwin</h1>
-
-    <h3 style='text-align:center;color:#9CA3AF;'>
-    Hybrid AI–Physics Digital Twin Platform
-    </h3>
-
-    <p style='text-align:center;font-size:18px;color:#D1D5DB'>
-    HAL × IIT Indore Hackathon 2026
-    </p>
-
-    <p style='text-align:center;color:#94A3B8'>
-    Real-Time Turbojet Engine Health Monitoring • Physics Validation • Predictive Maintenance
-    </p>
+    <div style="text-align:center;
+                color:#9CA3AF;
+                font-size:18px;
+                margin-top:-10px;
+                margin-bottom:20px;">
+    AI + Physics Powered Turbojet Digital Twin
+    </div>
     """,
-    unsafe_allow_html=True,
+    unsafe_allow_html=True
 )
 
+st.divider()
+st.write("")
 st.divider()
 
 # -------------------------------------------------
